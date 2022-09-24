@@ -1,0 +1,19 @@
+﻿@model IList<ProductOverviewModel>
+@if (Model.Count > 0)
+{
+    <div class="product-grid bestsellers">
+        <div class="title">
+			<div style="text-align: center;">
+				<img src="images/thumbs/bestsellers-removebg-preview.png" />
+			</div>
+        </div>
+        <div class="item-grid">
+            @foreach (var item in Model)
+            {
+                <div class="item-box">
+                    @await Html.PartialAsync("_ProductBox", item)
+                </div>
+            }
+        </div>
+    </div>
+}

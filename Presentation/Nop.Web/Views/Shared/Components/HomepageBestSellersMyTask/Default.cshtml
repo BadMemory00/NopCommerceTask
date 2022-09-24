@@ -1,0 +1,155 @@
+﻿@model IList<ProductOverviewModel>
+
+<div style="text-align: center;">
+	<img src="images/thumbs/bestsellers-removebg-preview.png" />
+</div>
+
+@if (Model.Count >= 3)
+{
+	<div class="main-widget">
+		<div class="main-item">
+			<img class="string-image" src="images/thumbs/stringdrawing.png"/>
+			<div class="main-item-text">
+				<h1>Get The Yoyo Everybody Looking For</h1>
+				<br>
+				<h2>@Model[0].Name</h2>
+				<br>
+				<br>
+				<a class="buy-here-link" href="@Url.RouteUrl("Product", new { SeName = Model[0].SeName })" title="@Model[0].DefaultPictureModel.Title">Buy Now For @Model[0].ProductPrice.Price</a>
+			</div>
+			<div class="main-item-picture">
+				<a href="@Url.RouteUrl("Product", new { SeName = Model[0].SeName })" title="@Model[0].DefaultPictureModel.Title">
+					<img class="yoyo-image" width="400" alt="@Model[0].DefaultPictureModel.AlternateText" src="@Model[0].DefaultPictureModel.ImageUrl" title="@Model[0].DefaultPictureModel.Title" />
+				</a>
+			</div>
+		</div>
+		<div class="side-items">
+			<div class="side-item">
+				<div>
+					<h2>@Model[1].Name</h2>
+					<br>
+					<br>
+					<a class="buy-here-link" href="@Url.RouteUrl("Product", new { SeName = Model[1].SeName })" title="@Model[1].DefaultPictureModel.Title">Buy Now</a>
+				</div>
+
+				<a href="@Url.RouteUrl("Product", new { SeName = Model[1].SeName })" title="@Model[1].DefaultPictureModel.Title">
+					<img class="yoyo-image" width="200" alt="@Model[1].DefaultPictureModel.AlternateText" src="@Model[1].DefaultPictureModel.ImageUrl" title="@Model[1].DefaultPictureModel.Title" />
+				</a>
+			</div>
+			<div class="side-item">
+				<div>
+					<h2>@Model[2].Name</h2>
+					<br>
+					<br>
+					<a class="buy-here-link" href="@Url.RouteUrl("Product", new { SeName = Model[2].SeName })" title="@Model[2].DefaultPictureModel.Title">Buy Now</a>
+				</div>
+	
+				<a href="@Url.RouteUrl("Product", new { SeName = Model[2].SeName })" title="@Model[2].DefaultPictureModel.Title">
+					<img class="yoyo-image" width="200" alt="@Model[2].DefaultPictureModel.AlternateText" src="@Model[2].DefaultPictureModel.ImageUrl" title="@Model[2].DefaultPictureModel.Title" />
+				</a>
+			</div>
+		</div>
+	</div>
+
+}
+@if (Model.Count < 3)
+{
+	<div class="product-grid bestsellers">
+		<div class="title">
+			<strong>Take a look at JoJo's Best Sellers</strong>
+		</div>
+		<div class="item-grid">
+			@foreach (var item in Model)
+			{
+				<div class="item-box">
+					@await Html.PartialAsync("_ProductBox", item)
+				</div>
+			}
+		</div>
+	</div>
+}
+<div class="view-all-div">
+	<a class="view-all-link" href="@Url.RouteUrl("bestsellers")">View All</a>
+</div>
+<style>
+	.main-widget{
+		display: flex;
+		gap: 1rem;
+		padding: 2rem;
+	}
+	.main-item{
+		flex: 2 1 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem;
+		background-color: #D2DAFF;
+		border-radius: 10px;
+		position: relative;
+	}
+	.main-item-text{
+		z-index: 1;
+	}
+	.side-items{
+		flex: 1 1 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		align-items: flex-end;
+		justify-content: space-between;
+	}
+	.side-item{
+		flex: 1 1 20px;
+		display: flex;
+		justify-content: space-between; 
+		align-items: center;
+		width: 100%;
+		background-color: #D2DAFF;
+		padding: 1rem;
+		border-radius: 10px;
+		z-index: 1;
+	}
+	.buy-here-link{
+		background-color: #3f007f;
+		padding: 1rem;
+		color: white;
+		font-weight: 700;
+		border-radius: 5px;
+		transition: all .5s ease-in-out;
+	}
+
+	.buy-here-link:hover{
+		background-color: #7f00ff;
+	}
+
+	.header-menu{
+		display: none;
+	}
+	.yoyo-image{
+		transition: all .4s ease-in-out;
+	}
+	.yoyo-image:hover{
+		transform: scale(1.07);
+	}
+
+	.view-all-div{
+		display: flex;
+		justify-content: flex-end;
+		margin-right: 3rem;
+	}
+	.view-all-link{
+		background-color: #EEF1FF;
+		color: blue;
+		padding: .6rem;
+		transition: all .3s linear;
+	}
+	.view-all-link:hover{
+		color: white;
+		background-color: #3f007f;
+	}
+	.string-image{
+		position: absolute;
+		width: 70rem;
+		left: -1rem;
+	}
+</style>
